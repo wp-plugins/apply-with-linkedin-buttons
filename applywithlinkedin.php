@@ -4,7 +4,7 @@ Plugin Name: Apply with LinkedIn buttons
 Plugin URI: http://wordpress.org/extend/plugins/apply-with-linkedin-buttons/
 Description: Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them
 Author: Martijn Heesters - d-Media
-Version: 1.0
+Version: 1.0.1
 Author URI: http://d-media.nl
 */
 
@@ -28,7 +28,7 @@ function add_applywithlinkedin_js(){
 }
 
 // shortcode for adding linkedin buttons to post
-//[applywithlinkedin jobtitle="Developer" companyname="d-Media" email="martijn@d-media.nl"]
+//[applywithlinkedin jobtitle="Job title" companyname="My Company" email="myemail@address.com" logo="http://yoursite.com/yourlogo.png" themecolor="#ff0000" coverletter="required"]
 function applywithlinkedin_sc_func( $atts ) {
 	extract( shortcode_atts( array(
 		'jobtitle' => '',
@@ -36,21 +36,25 @@ function applywithlinkedin_sc_func( $atts ) {
 		'email' => '',
 		'logo' => '',
 		'themecolor' => '',
+		'coverletter' => ''
 	), $atts ) );
-	// clean vars
-	$jobtitle=strip_tags($jobtitle);
-	$companyname=strip_tags($companyname);
-	$email=strip_tags($email);
-	$logo=strip_tags($omschrijving);
-	$themecolor=strip_tags($themecolor);
-	if ($logo != ''){ $logo='data-logo="'.$logo.'"'; }
-	if ($themecolor != ''){ $themecolor='data-themecolor="'.$themecolor.'"'; }
-	// build button
-	$result='<script type="IN/Apply" data-jobtitle="'.$jobtitle.'" data-email="'.$email.'" data-companyname="'.$companyname.'" '.$logo.' '.$themecolor.' ></script>';
-	// add div for styling
-	if ( get_option( 'applywithlinkedin_divstyling' ) == 1){ $result='<div class="applywithlinkedinButton">'.$result.'</div>'; }
-	// return button
-	return $result;
+	// check if set email address is my work email address (author). Some people won't change it so i get spammed
+	if ( $email == 'martijn@d-media.nl'){
+		return 'Please notify website administrator to check the email addresses used in the shortcodes of the "Apply with LinkedIn" plugin. The current address is still set to the authors email address';
+	} else {
+		// clean vars
+		if (( $coverletter != 'optional' ) && ( $coverletter != 'required' ) ){	$coverletter = 'hidden'; } // optional, required or hidden (default)
+		$logo = sanitize_text_field( $logo ); // http://www.xyzcompany.com/images/logo.png
+		if ($logo != ''){ $logo='data-logo="'.$logo.'"'; }
+		$themecolor = sanitize_text_field( $themecolor ); // #ff0000
+		if ($themecolor != ''){ $themecolor='data-themecolor="'.$themecolor.'"'; }
+		// build button
+		$result='<script type="IN/Apply" data-jobtitle="'.sanitize_text_field($jobtitle).'" data-email="'.sanitize_text_field($email).'" data-companyname="'.sanitize_text_field($companyname).'" '.$logo.' '.$themecolor.' data-coverLetter="'.$coverletter.'"></script>';
+		// add div for styling
+		if ( get_option( 'applywithlinkedin_divstyling' ) == 1){ $result='<div class="applywithlinkedinButton">'.$result.'</div>'; }
+		// return button
+		return $result;
+	}
 }
 add_shortcode( 'applywithlinkedin', 'applywithlinkedin_sc_func' );
 
@@ -114,7 +118,9 @@ function applywithlinkedin_options_page(){
             </form>
 
 			After setting up the API key you can use the following shortcode to add buttons to your post:<br /><br />
-			<span style="font-family: Courier;font-size: 14px;background-color: #eeeeee;padding: 5px;">[applywithlinkedin jobtitle="Developer" companyname="d-Media" email="martijn@d-media.nl"]</span>
+			<span style="display:block;font-family: Courier !important;font-size: 14px;background-color: #fff;padding: 5px;">[applywithlinkedin jobtitle="Job title" companyname="My Company" email="myemail@address.com" logo="http://yoursite.com/yourlogo.png" themecolor="#ff0000" coverletter="required"]</span>
+			<br />
+			Note that setting a logo, theme color or cover letter is optional. The possible values for cover letter are: optional, required and hidden default).
 			
 	</div>
 	<?php

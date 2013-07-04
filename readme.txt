@@ -2,8 +2,8 @@
 Contributors: martijnh
 Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
-Tested up to: 3.4.2
-Stable tag: 1.0
+Tested up to: 3.5.2
+Stable tag: 1.0.1
 
 Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them
 
@@ -25,6 +25,7 @@ This section describes how to install the plugin and get it working.
 1. After activation you can configure the plugin using the `settings` link or the menu
 1. Set up the API key in the settings
 1. Use the shortcode example to add buttons to your post
+1. Don't forget to change the email address in the example to your own!
 
 == Frequently Asked Questions ==
 
@@ -41,6 +42,13 @@ Please visit the developer section on LinkedIn: https://www.linkedin.com/secure/
 1. Overview of the admin options page
 
 == Changelog ==
+
+= 1.1 =
+* Added ability to set a logo image, add a cover letter and set the theme color of the popup
+* Security update, better textfield sanitization
+* Changed the email address in the example because users didn't fill in their own
+* Added check before executing shortcode that stops execution if the authors email address is used
+* Updated screenshot
 
 = 1.0 =
 * First stable release
