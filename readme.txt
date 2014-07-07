@@ -3,7 +3,7 @@ Contributors: martijnh
 Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
 Tested up to: 3.9.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 **Important announcement: This plugin will stop working after July 31 ! ** Please read the plugins description section for details.
 Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them.
@@ -55,6 +55,10 @@ Please visit the developer section on LinkedIn: https://www.linkedin.com/secure/
 1. Overview of the admin options page
 
 == Changelog ==
+
+= 1.2.2 =
+* Omportant message: This plugin will stop working after July 31, please read the description section!
+* Also added above message to the settings page
 
 = 1.2.1 =
 * Added important message: This plugin will stop working after July 31, please read the description section!
