@@ -2,12 +2,25 @@
 Contributors: martijnh
 Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
-Tested up to: 3.5.2
-Stable tag: 1.2
+Tested up to: 3.9.1
+Stable tag: 1.2.1
 
-Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them
+**Important announcement: This plugin will stop working after July 31 ! ** Please read the plugins description section for details.
+Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them.
 
 == Description ==
+
+**Important announcement: This plugin will stop working after July 31 !**
+
+On June 19 LinkedIn announced it will stop supporting its 'Apply with LinkedIn' functionality in its current state as of July 31.
+This automatically means our plugin will stop working after July 31.
+
+LinkedIn encourages developers to migrate from Apply with LinkedIn to the Profile API to maintain the same functionality, but this is not a straightforward process.
+We are currently assessing if we will rebuild the current plugin, and if so, when we will do this.
+
+Show us your support by leaving us an email at **wp-apply@d-media.nl**. You will be the first to know about updates regarding a new/rebuild plugin.
+
+----
 
 Easily add "Apply with LinkedIn" buttons to your posts and lets you customize them.
 The plugin features an options page in which the following can be configured:
@@ -42,6 +55,10 @@ Please visit the developer section on LinkedIn: https://www.linkedin.com/secure/
 1. Overview of the admin options page
 
 == Changelog ==
+
+= 1.2.1 =
+* Added important message: This plugin will stop working after July 31, please read the description section!
+* No changes in code/functionality
 
 = 1.2 =
 * Added ability to set the button size
