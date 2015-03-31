@@ -4,7 +4,7 @@ Plugin Name: Apply with LinkedIn buttons
 Plugin URI: http://wordpress.org/extend/plugins/apply-with-linkedin-buttons/
 Description: Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them
 Author: Ivo Brett - ApplyMetrics
-Version: 2.1.1
+Version: 2.0
 Author URI: http://www.applymetrics.com
 */
 
