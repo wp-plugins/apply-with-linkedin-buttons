@@ -47,7 +47,29 @@ Please visit the developer section on LinkedIn: https://www.linkedin.com/secure/
 
 == Changelog ==
 
-= 2.1.1 =
+= 2.0 =
+* Updated stable release (back working again)
+
+= 1.2.2 =
+* Omportant message: This plugin will stop working after July 31, please read the description section!
+* Also added above message to the settings page
+
+= 1.2.1 =
+* Added important message: This plugin will stop working after July 31, please read the description section!
+* No changes in code/functionality
+
+= 1.2 =
+* Added ability to set the button size
+* Updated screenshot
+
+= 1.1 =
+* Added ability to set a logo image, add a cover letter and set the theme color of the popup
+* Security update, better textfield sanitization
+* Changed the email address in the example because users didn't fill in their own
+* Added check before executing shortcode that stops execution if the authors email address is used
+* Updated screenshot
+
+= 1.0 =
 * First stable release
 
 == Arbitrary section ==
