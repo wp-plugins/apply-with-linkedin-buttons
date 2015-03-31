@@ -14,11 +14,11 @@ Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts
 == Description ==
 
 Easily add "Apply with LinkedIn" buttons to your posts and lets you customize them. Let people apply
-jobs using their LinkedIn profile. Receive applications to your nominated email address.
+to your jobs using their LinkedIn profile. Receive applications to your nominated email address.
 The plugin features an options page in which the following can be configured:
 
-Display options: Custom styling option, adds a containing div with classname which you can style in your stylesheet
-Configuration options: Web service based webhook to insert applications directly to your database
+* Display options: Custom styling option, adds a containing div with classname which you can style in your stylesheet
+* Configuration options: Web service based webhook to insert applications directly to your database
 
 == Installation ==
 
