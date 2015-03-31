@@ -1,26 +1,17 @@
 === Apply with LinkedIn buttons ===
-Contributors: martijnh
+Contributors: Ivo Brett
 Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
-Tested up to: 3.9.1
-Stable tag: 1.2.2
+Tested up to: 4.1.1
+Stable tag: 2.0
 
-**Important announcement: This plugin will stop working after July 31 ! ** Please read the plugins description section for details.
+**Important announcement: This plugin will is not affiliated with LinkedIn ! 
+**Credit to Martijn Heesters and the team over at D-media.nl for the excellent work in starting this plugin
+**Please read the plugins description section for details.
+
 Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them.
 
 == Description ==
-
-**Important announcement: This plugin will stop working after July 31 !**
-
-On June 19 LinkedIn announced it will stop supporting its 'Apply with LinkedIn' functionality in its current state as of July 31.
-This automatically means our plugin will stop working after July 31.
-
-LinkedIn encourages developers to migrate from Apply with LinkedIn to the Profile API to maintain the same functionality, but this is not a straightforward process.
-We are currently assessing if we will rebuild the current plugin, and if so, when we will do this.
-
-Show us your support by leaving us an email at **wp-apply@d-media.nl**. You will be the first to know about updates regarding a new/rebuild plugin.
-
-----
 
 Easily add "Apply with LinkedIn" buttons to your posts and lets you customize them.
 The plugin features an options page in which the following can be configured:
@@ -44,7 +35,7 @@ This section describes how to install the plugin and get it working.
 
 = Can you customize this plugin for me ? =
 
-Sure, just contact our company (http://d-media.nl) for more information
+Sure, just contact our company http://www.applymetrics.com for more information
 
 = Where can i find more info on how to get an API key ? =
 
@@ -56,26 +47,7 @@ Please visit the developer section on LinkedIn: https://www.linkedin.com/secure/
 
 == Changelog ==
 
-= 1.2.2 =
-* Omportant message: This plugin will stop working after July 31, please read the description section!
-* Also added above message to the settings page
-
-= 1.2.1 =
-* Added important message: This plugin will stop working after July 31, please read the description section!
-* No changes in code/functionality
-
-= 1.2 =
-* Added ability to set the button size
-* Updated screenshot
-
-= 1.1 =
-* Added ability to set a logo image, add a cover letter and set the theme color of the popup
-* Security update, better textfield sanitization
-* Changed the email address in the example because users didn't fill in their own
-* Added check before executing shortcode that stops execution if the authors email address is used
-* Updated screenshot
-
-= 1.0 =
+= 2.1.1 =
 * First stable release
 
 == Arbitrary section ==
