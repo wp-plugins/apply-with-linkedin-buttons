@@ -1,33 +1,25 @@
 === Apply with LinkedIn buttons ===
-Contributors: martijnh
+Contributors: Ivo Brett
 Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
-Tested up to: 3.9.1
-Stable tag: 1.2.2
+Tested up to: 4.1.1
+Stable tag: 2.1
 
-**Important announcement: This plugin will stop working after July 31 ! ** Please read the plugins description section for details.
-Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them.
+**Important announcement: Plugin is working again and is not affiliated with LinkedIn 
+**Please read the plugins description section for details.
+
+Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts.
 
 == Description ==
 
-**Important announcement: This plugin will stop working after July 31 !**
-
-On June 19 LinkedIn announced it will stop supporting its 'Apply with LinkedIn' functionality in its current state as of July 31.
-This automatically means our plugin will stop working after July 31.
-
-LinkedIn encourages developers to migrate from Apply with LinkedIn to the Profile API to maintain the same functionality, but this is not a straightforward process.
-We are currently assessing if we will rebuild the current plugin, and if so, when we will do this.
-
-Show us your support by leaving us an email at **wp-apply@d-media.nl**. You will be the first to know about updates regarding a new/rebuild plugin.
-
-----
-
-Easily add "Apply with LinkedIn" buttons to your posts and lets you customize them.
+Easily add "Apply with LinkedIn" buttons to your posts and lets you customize them. Let people apply
+to your jobs using their LinkedIn profile. Receive applications to your nominated email address.
 The plugin features an options page in which the following can be configured:
 
-Display options:
+* Display options: Custom styling option, adds a containing div with classname which you can style in your stylesheet
+* Configuration options: Web service based webhook to insert applications directly to your database
 
-* Custom styling option, adds a containing div with classname which you can style in your stylesheet
+**Credit to Martijn Heesters and everyone at D-media.nl for starting this plugin
 
 == Installation ==
 
@@ -44,7 +36,7 @@ This section describes how to install the plugin and get it working.
 
 = Can you customize this plugin for me ? =
 
-Sure, just contact our company (http://d-media.nl) for more information
+Sure, just contact our company http://www.applymetrics.com for more information
 
 = Where can i find more info on how to get an API key ? =
 
@@ -55,6 +47,12 @@ Please visit the developer section on LinkedIn: https://www.linkedin.com/secure/
 1. Overview of the admin options page
 
 == Changelog ==
+
+= 2.1 =
+* Updated stable release (removed debug alerts and prompts unless specifically configured)
+
+= 2.0 =
+* Updated stable release (back working again)
 
 = 1.2.2 =
 * Omportant message: This plugin will stop working after July 31, please read the description section!

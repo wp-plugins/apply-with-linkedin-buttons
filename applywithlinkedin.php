@@ -3,9 +3,9 @@
 Plugin Name: Apply with LinkedIn buttons
 Plugin URI: http://wordpress.org/extend/plugins/apply-with-linkedin-buttons/
 Description: Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them
-Author: Martijn Heesters - d-Media
-Version: 1.2.2
-Author URI: http://d-media.nl
+Author: Ivo Brett - ApplyMetrics
+Version: 2.1
+Author URI: http://www.applymetrics.com
 */
 
 /* init */
@@ -22,36 +22,79 @@ if ( is_admin() ) {
 
 // this function adds the google js code to (the end of) the page
 function add_applywithlinkedin_js(){
-	if ( get_option( 'applywithlinkedin_apikey' ) != ''){
-		echo '<script src="//platform.linkedin.com/in.js" type="text/javascript"> api_key: '.stripslashes(strip_tags(get_option( 'applywithlinkedin_apikey' ))).' </script>';
+	if ( (get_option( 'applywithlinkedin_apikey' ) != '') ) {
+echo '<script type="text/javascript">';
+echo "\r\n";
+echo '(function() {';
+echo "\r\n";
+echo '	if(!("object"==typeof LI)){';
+echo "\r\n";
+echo '		console.log("linkedin in.js is not install yet. installing..."); // print into console';
+echo "\r\n";
+echo '        var o = document.getElementsByTagName("body")[0];';
+echo "\r\n";
+echo '        o || (o = document.createElement("body"), document.documentElement.appendChild(o));';
+echo "\r\n";
+echo '        var a = document.createElement("script");';
+echo "\r\n";
+echo '        console.log("in.js is loading..."); ';
+echo "\r\n";
+echo '		a.src = "//platform.linkedin.com/in.js?async=true";';
+echo "\r\n";
+echo '		a.type = "text/javascript";';
+echo "\r\n";
+echo '		a.id = "linkedin_injected_script";';
+echo "\r\n";
+echo '		a.onload = function(){';
+echo "\r\n";
+if ( get_option( 'applywithlinkedin_apidebug' ) == 1){  
+echo '			window.addEventListener("error", function errorHandler(e) {if (confirm("There is an error with your API key configuration. See documentation?") == true) {window.top.location.href="http://www.applymetrics.com/plugin1.html"};window.removeEventListener("error", errorHandler, false)}, false);';
+echo "\r\n";
+}
+echo '			IN.init({api_key: "'.stripslashes(strip_tags(get_option( 'applywithlinkedin_apikey' ))).'", extensions: "MobileJobs@//apply.aws.af.cm/api/mobilejobstag.js,LIApply@//apply.aws.af.cm/api/linkedinapplytag.js"});';
+echo "\r\n";
+echo '		};';
+echo "\r\n";
+echo '		o.appendChild(a);';
+echo "\r\n";
+echo '	}';
+echo "\r\n";
+echo '	else {';
+echo "\r\n";
+echo '		console.log("linkedin in.js is already installed. No need to inject"); 		';
+echo "\r\n";
+echo '	}';
+echo "\r\n";
+echo '}).call(this);';
+echo "\r\n";
+echo '</script>';
 	} // if
 }
 
 // shortcode for adding linkedin buttons to post
-//[applywithlinkedin jobtitle="Job title" companyname="My Company" email="myemail@address.com" logo="http://yoursite.com/yourlogo.png" themecolor="#ff0000" coverletter="required"]
+//[applywithlinkedin jobtitle="Job title" companyname="My Company" email="info@applymetrics.com" logo="http://yoursite.com/yourlogo.png" themecolor="#ff0000" coverletter="required"]
 function applywithlinkedin_sc_func( $atts ) {
 	extract( shortcode_atts( array(
 		'jobtitle' => '',
 		'companyname' => '',
 		'email' => '',
-		'logo' => '',
-		'themecolor' => '',
+		'reqid' => '',
+		'phone' => '',
 		'coverletter' => '',
 		'size' => ''
 	), $atts ) );
 	// check if set email address is my work email address (author). Some people won't change it so i get spammed
-	if ( $email == 'martijn@d-media.nl'){
+	if ( $email == 'info@applymetrics.com'){
 		return 'Please notify website administrator to check the email addresses used in the shortcodes of the "Apply with LinkedIn" plugin. The current address is still set to the authors email address';
 	} else {
 		// clean vars
 		if (( $coverletter != 'optional' ) && ( $coverletter != 'required' ) ){	$coverletter = 'hidden'; } // optional, required or hidden (default)
-		if (( $size != 'medium' ) && ( $size != 'small' ) ){ $size = ''; } // small, medium or empty (=large=default)
-		$logo = sanitize_text_field( $logo ); // http://www.xyzcompany.com/images/logo.png
-		if ($logo != ''){ $logo='data-logo="'.$logo.'"'; }
-		$themecolor = sanitize_text_field( $themecolor ); // #ff0000
-		if ($themecolor != ''){ $themecolor='data-themecolor="'.$themecolor.'"'; }
+		if (( $phone != 'optional' ) && ( $phone != 'required' ) ){	$phone = 'hidden'; } // optional, required or hidden (default)
+		if (( $size != 'medium' )  ){ $size = ''; } // small, medium or empty (=large=default)
+		$jobid = sanitize_text_field( $jobid ); // CI-12
+		if ($jobid != ''){ $jobid='data-jobid="'.$jobid.'"'; }
 		// build button
-		$result='<script type="IN/Apply" data-jobtitle="'.sanitize_text_field($jobtitle).'" data-email="'.sanitize_text_field($email).'" data-companyname="'.sanitize_text_field($companyname).'" '.$logo.' '.$themecolor.' data-coverLetter="'.$coverletter.'" data-size="'.sanitize_text_field($size).'"></script>';
+		$result='<script type="IN/LIApply" data-jobtitle="'.sanitize_text_field($jobtitle).'" data-email="'.sanitize_text_field($email).'" data-companyname="'.sanitize_text_field($companyname).'" '.$jobid.' '.' data-phone="'.$phone.'" data-coverLetter="'.$coverletter.'" data-size="'.sanitize_text_field($size).'"></script>';
 		// add div for styling
 		if ( get_option( 'applywithlinkedin_divstyling' ) == 1){ $result='<div class="applywithlinkedinButton">'.$result.'</div>'; }
 		// return button
@@ -69,6 +112,7 @@ function applywithlinkedin_register_plugin_settings() {
 		// add options with default values (only adds them if they don't exist yet)
 		add_option( 'applywithlinkedin_apikey' ,'' );
 		add_option( 'applywithlinkedin_divstyling','' );
+		add_option( 'applywithlinkedin_apidebug','' );
 	}
 }
 
@@ -91,6 +135,7 @@ function applywithlinkedin_options_page(){
 		if ( isset( $_POST['Submit'] ) ){
 			update_option( 'applywithlinkedin_apikey', $_POST['apikey'] );
 			update_option( 'applywithlinkedin_divstyling', $_POST['divstyling'] );
+			update_option( 'applywithlinkedin_apidebug', $_POST['apidebug'] );
 		}
 	}
 	?>
@@ -100,14 +145,6 @@ function applywithlinkedin_options_page(){
             <form method="post" action="options-general.php?page=applywithlinkedin.php">
                 <table class="form-table">
                     <tr>
-                        <td valign="top"><strong><?php _e( 'Display options', 'applywithlinkedin' );?></strong></td>
-                        <td valign="top">
-                            <input type="checkbox" id="awl_divstyling" value="1" <?php if (get_option( 'applywithlinkedin_divstyling' ) == '1' ) echo 'checked="checked"'; ?> name="divstyling" />
-                            <label for="divstyling"><?php _e( 'Add a containing div for each button with the classname <i>applywithlinkedinButton</i>, use this to style and position the button', 'applywithlinkedin' );?></label>
-                            <br />							
-                        </td>
-                    </tr>
-                    <tr>
                         <td valign="top"><strong><?php _e( 'Settings', 'applywithlinkedin' );?></strong></td>
                         <td>
 							<label for="awl_apikey"><?php _e( 'API key', 'applywithlinkedin' );?>:</label>
@@ -115,16 +152,33 @@ function applywithlinkedin_options_page(){
 							<br />
 						</td>
 					</tr>
+                    <tr>
+                        <td valign="top"><strong><?php _e( 'Debugging options', 'applywithlinkedin' );?></strong></td>
+                        <td valign="top">
+                            <input type="checkbox" id="awl_apidebug" value="1" <?php if (get_option( 'applywithlinkedin_apidebug' ) == '1' ) echo 'checked="checked"'; ?> name="apidebug" />
+                            <label for="apidebug"><?php _e( 'Checking this box will provide additional debugging prompts. Tick this box if you are having difficulties getting the plugin to work', 'applywithlinkedin' );?></label>
+                            <br />							
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><strong><?php _e( 'Display options', 'applywithlinkedin' );?></strong></td>
+                        <td valign="top">
+                            <input type="checkbox" id="awl_divstyling" value="1" <?php if (get_option( 'applywithlinkedin_divstyling' ) == '1' ) echo 'checked="checked"'; ?> name="divstyling" />
+                            <label for="divstyling"><?php _e( 'Add a containing div for each button with the classname <i>applywithlinkedinButton</i>, use this to style and position the button', 'applywithlinkedin' );?></label>
+                            <br />							
+                        </td>
+                    </tr>
 				</table>
             <p class="submit"><input type="submit" name="Submit" value="<?php _e( 'Save Changes', 'applywithlinkedin' );?>" /></p>
             </form>
 
 			After setting up the API key you can use the following shortcode to add buttons to your post:<br /><br />
-			<span style="display:block;font-family: Courier !important;font-size: 14px;background-color: #fff;padding: 5px;">[applywithlinkedin jobtitle="Job title" companyname="My Company" email="myemail@address.com" logo="http://yoursite.com/yourlogo.png" themecolor="#ff0000" coverletter="required" size="small"]</span>
+			<span style="display:block;font-family: Courier !important;font-size: 14px;background-color: #fff;padding: 5px;">[applywithlinkedin jobtitle="Job title" companyname="My Company" email="info@applymetrics.com" jobid="2013" phone="required" coverletter="hidden" size="medium"]</span>
 			<br />
-			Note that setting a logo, theme color, size or cover letter is optional.<br />
 			The possible values for cover letter are: optional, required and hidden (default)<br />
-			The possible values for size are: small, medium and large (default)<br />
+			The possible values for phone are: optional(default), required and hidden <br />
+			The possible values for size are: medium and large (default)<br />
+			The possible values for jobid are: a unique job identifier (optional)<br />
 
 	</div>
 	<?php
