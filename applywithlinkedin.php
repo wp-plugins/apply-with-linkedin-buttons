@@ -4,7 +4,7 @@ Plugin Name: Apply with LinkedIn buttons
 Plugin URI: http://wordpress.org/extend/plugins/apply-with-linkedin-buttons/
 Description: Use this plugin to easily add "Apply with LinkedIn" buttons to job opening posts and lets you customize them
 Author: Ivo Brett - ApplyMetrics
-Version: 2.0
+Version: 2.1
 Author URI: http://www.applymetrics.com
 */
 
@@ -47,9 +47,10 @@ echo '		a.id = "linkedin_injected_script";';
 echo "\r\n";
 echo '		a.onload = function(){';
 echo "\r\n";
-echo "\r\n";
+if ( get_option( 'applywithlinkedin_apidebug' ) == 1){  
 echo '			window.addEventListener("error", function errorHandler(e) {if (confirm("There is an error with your API key configuration. See documentation?") == true) {window.top.location.href="http://www.applymetrics.com/plugin1.html"};window.removeEventListener("error", errorHandler, false)}, false);';
 echo "\r\n";
+}
 echo '			IN.init({api_key: "'.stripslashes(strip_tags(get_option( 'applywithlinkedin_apikey' ))).'", extensions: "MobileJobs@//apply.aws.af.cm/api/mobilejobstag.js,LIApply@//apply.aws.af.cm/api/linkedinapplytag.js"});';
 echo "\r\n";
 echo '		};';
@@ -111,6 +112,7 @@ function applywithlinkedin_register_plugin_settings() {
 		// add options with default values (only adds them if they don't exist yet)
 		add_option( 'applywithlinkedin_apikey' ,'' );
 		add_option( 'applywithlinkedin_divstyling','' );
+		add_option( 'applywithlinkedin_apidebug','' );
 	}
 }
 
@@ -133,6 +135,7 @@ function applywithlinkedin_options_page(){
 		if ( isset( $_POST['Submit'] ) ){
 			update_option( 'applywithlinkedin_apikey', $_POST['apikey'] );
 			update_option( 'applywithlinkedin_divstyling', $_POST['divstyling'] );
+			update_option( 'applywithlinkedin_apidebug', $_POST['apidebug'] );
 		}
 	}
 	?>
@@ -142,14 +145,6 @@ function applywithlinkedin_options_page(){
             <form method="post" action="options-general.php?page=applywithlinkedin.php">
                 <table class="form-table">
                     <tr>
-                        <td valign="top"><strong><?php _e( 'Display options', 'applywithlinkedin' );?></strong></td>
-                        <td valign="top">
-                            <input type="checkbox" id="awl_divstyling" value="1" <?php if (get_option( 'applywithlinkedin_divstyling' ) == '1' ) echo 'checked="checked"'; ?> name="divstyling" />
-                            <label for="divstyling"><?php _e( 'Add a containing div for each button with the classname <i>applywithlinkedinButton</i>, use this to style and position the button', 'applywithlinkedin' );?></label>
-                            <br />							
-                        </td>
-                    </tr>
-                    <tr>
                         <td valign="top"><strong><?php _e( 'Settings', 'applywithlinkedin' );?></strong></td>
                         <td>
 							<label for="awl_apikey"><?php _e( 'API key', 'applywithlinkedin' );?>:</label>
@@ -157,6 +152,22 @@ function applywithlinkedin_options_page(){
 							<br />
 						</td>
 					</tr>
+                    <tr>
+                        <td valign="top"><strong><?php _e( 'Debugging options', 'applywithlinkedin' );?></strong></td>
+                        <td valign="top">
+                            <input type="checkbox" id="awl_apidebug" value="1" <?php if (get_option( 'applywithlinkedin_apidebug' ) == '1' ) echo 'checked="checked"'; ?> name="apidebug" />
+                            <label for="apidebug"><?php _e( 'Checking this box will provide additional debugging prompts. Tick this box if you are having difficulties getting the plugin to work', 'applywithlinkedin' );?></label>
+                            <br />							
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><strong><?php _e( 'Display options', 'applywithlinkedin' );?></strong></td>
+                        <td valign="top">
+                            <input type="checkbox" id="awl_divstyling" value="1" <?php if (get_option( 'applywithlinkedin_divstyling' ) == '1' ) echo 'checked="checked"'; ?> name="divstyling" />
+                            <label for="divstyling"><?php _e( 'Add a containing div for each button with the classname <i>applywithlinkedinButton</i>, use this to style and position the button', 'applywithlinkedin' );?></label>
+                            <br />							
+                        </td>
+                    </tr>
 				</table>
             <p class="submit"><input type="submit" name="Submit" value="<?php _e( 'Save Changes', 'applywithlinkedin' );?>" /></p>
             </form>

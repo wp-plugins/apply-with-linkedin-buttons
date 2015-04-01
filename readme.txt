@@ -3,7 +3,7 @@ Contributors: Ivo Brett
 Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
 Tested up to: 4.1.1
-Stable tag: 2.0
+Stable tag: 2.1
 
 **Important announcement: Plugin is working again and is not affiliated with LinkedIn 
 **Please read the plugins description section for details.
@@ -47,6 +47,9 @@ Please visit the developer section on LinkedIn: https://www.linkedin.com/secure/
 1. Overview of the admin options page
 
 == Changelog ==
+
+= 2.1 =
+* Updated stable release (removed debug alerts and prompts unless specifically configured)
 
 = 2.0 =
 * Updated stable release (back working again)
