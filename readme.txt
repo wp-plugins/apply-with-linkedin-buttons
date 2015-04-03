@@ -4,7 +4,6 @@ Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
 Tested up to: 4.1.1
 Stable tag: 2.1
-Author URI: http://www.applymetrics.com
 
 **Important announcement: Plugin is working again and is not affiliated with LinkedIn 
 **Please read the plugins description section for details.
