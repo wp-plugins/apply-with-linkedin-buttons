@@ -80,6 +80,7 @@ function applywithlinkedin_sc_func( $atts ) {
 		'email' => '',
 		'reqid' => '',
 		'phone' => '',
+		'force' => '',
 		'coverletter' => '',
 		'size' => ''
 	), $atts ) );
@@ -91,10 +92,11 @@ function applywithlinkedin_sc_func( $atts ) {
 		if (( $coverletter != 'optional' ) && ( $coverletter != 'required' ) ){	$coverletter = 'hidden'; } // optional, required or hidden (default)
 		if (( $phone != 'optional' ) && ( $phone != 'required' ) ){	$phone = 'hidden'; } // optional, required or hidden (default)
 		if (( $size != 'medium' )  ){ $size = ''; } // small, medium or empty (=large=default)
+		if (( $force == 'true' )  ){ $force = 'data-force="true"'; } else { $force = ''; } // force the button to top
 		$jobid = sanitize_text_field( $jobid ); // CI-12
 		if ($jobid != ''){ $jobid='data-jobid="'.$jobid.'"'; }
 		// build button
-		$result='<script type="IN/LIApply" data-jobtitle="'.sanitize_text_field($jobtitle).'" data-email="'.sanitize_text_field($email).'" data-companyname="'.sanitize_text_field($companyname).'" '.$jobid.' '.' data-phone="'.$phone.'" data-coverLetter="'.$coverletter.'" data-size="'.sanitize_text_field($size).'"></script>';
+		$result='<script type="IN/LIApply" ' . $force . ' data-jobtitle="'.sanitize_text_field($jobtitle).'" data-email="'.sanitize_text_field($email).'" data-companyname="'.sanitize_text_field($companyname).'" '.$jobid.' '.' data-phone="'.$phone.'" data-coverLetter="'.$coverletter.'" data-size="'.sanitize_text_field($size).'"></script>';
 		// add div for styling
 		if ( get_option( 'applywithlinkedin_divstyling' ) == 1){ $result='<div class="applywithlinkedinButton">'.$result.'</div>'; }
 		// return button
@@ -173,13 +175,13 @@ function applywithlinkedin_options_page(){
             </form>
 
 			After setting up the API key you can use the following shortcode to add buttons to your post:<br /><br />
-			<span style="display:block;font-family: Courier !important;font-size: 14px;background-color: #fff;padding: 5px;">[applywithlinkedin jobtitle="Job title" companyname="My Company" email="info@applymetrics.com" jobid="2013" phone="required" coverletter="hidden" size="medium"]</span>
+			<span style="display:block;font-family: Courier !important;font-size: 14px;background-color: #fff;padding: 5px;">[applywithlinkedin jobtitle="Job title" companyname="My Company" email="info@applymetrics.com" jobid="2013" phone="required" force="true" coverletter="hidden" size="medium"]</span>
 			<br />
 			The possible values for cover letter are: optional, required and hidden (default)<br />
 			The possible values for phone are: optional(default), required and hidden <br />
 			The possible values for size are: medium and large (default)<br />
 			The possible values for jobid are: a unique job identifier (optional)<br />
-
+			The possible values for force are: true to force the modal to be on top (use if you have a layer content)<br />
 	</div>
 	<?php
 }
