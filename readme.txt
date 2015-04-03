@@ -1,9 +1,10 @@
 === Apply with LinkedIn buttons ===
-Contributors: Ivo Brett
+Contributors: ivobrett
 Tags: linkedin, apply, button, automator, job opening, social
 Requires at least: 2.8.0
 Tested up to: 4.1.1
 Stable tag: 2.1
+Author URI: http://www.applymetrics.com
 
 **Important announcement: Plugin is working again and is not affiliated with LinkedIn 
 **Please read the plugins description section for details.
@@ -20,6 +21,10 @@ The plugin features an options page in which the following can be configured:
 * Configuration options: Web service based webhook to insert applications directly to your database
 
 **Credit to Martijn Heesters and everyone at D-media.nl for starting this plugin
+
+Questions?
+email: support@applymetrics.com
+social: http://twitter.com/applymetrics
 
 == Installation ==
 
